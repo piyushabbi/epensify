@@ -1,0 +1,34 @@
+{
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.7",
+    "global": "^4.3.2",
+    "live-server": "^1.2.0",
+    "node-sass": "^4.6.1",
+    "normalize-css": "^2.3.1",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "react-modal": "^3.1.2",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
+    "validator": "^9.1.1",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.4"
+  },
+  "name": "expensify-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "",
+  "author": "Piyush Abbi",
+  "license": "MIT",
+  "scripts": {
+    "serve": "live-server public",
+    "build": "webpack --watch",
+    "dev-server": "webpack-dev-server",
+    "build:babel": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch"
+  }
+}
