@@ -6,14 +6,18 @@ import { createStore } from 'redux';
 // This is immidiately called automatically.
 const store = createStore((state = { count: 0 }, action) => {
   switch (action.type) {
-    case 'INCREMENT': 
+    case 'INCREMENT': {
+      const incrementBy = action.incrementBy ? action.incrementBy : 1
       return {
-        count: state.count + 1
+        count: state.count + incrementBy
       };
-    case 'DECREMENT':
+    }
+    case 'DECREMENT': {
+      const decrementBy = action.decrementBy ? action.decrementBy : 1
       return {
-        count: state.count - 1
+        count: state.count - decrementBy
       };
+    }
     case 'RESET': 
       return {
         count: 0
@@ -23,26 +27,36 @@ const store = createStore((state = { count: 0 }, action) => {
   }
 });
 
-// get state returns current state obj
-console.log('Initial State', store.getState());
+// Subscribe to changes as the store updates
+// Takes in a function argument
+// Return value of subscribe is actually a function we can call to unsubscribe.
+const unsubscribe = store.subscribe(() => {
+  console.log(store.getState())
+})
 
 // Actions: Obj that gets sent to the store and updates the app state
 // Inorder to send the action to the store, it is dispatched.
 // Store.dispatch will also call the createStore method again
 // Increment Count
 store.dispatch({
-  type: 'INCREMENT'
+  type: 'INCREMENT',
+  incrementBy: 5
 });
-console.log('Increment State', store.getState());
-
-// Decrement Count
 store.dispatch({
-  type: 'DECREMENT'
+  type: "INCREMENT"
 });
-console.log('Decrement State', store.getState());
+//unsubscribe(); To unsubscribe from the watcher
 
 // Reset Count
 store.dispatch({
   type: 'RESET'
 });
-console.log('Reset State', store.getState());
+// Decrement Count
+store.dispatch({
+  type: 'DECREMENT'
+});
+// Decrement Count
+store.dispatch({
+  type: 'DECREMENT',
+  decrementBy: 10
+});
