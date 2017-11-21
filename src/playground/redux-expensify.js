@@ -10,9 +10,16 @@ const demoState = {
     amount: 0,
     createdAt: 0
   },
-  filter: {}
+  filter: {
+    text: 'rent',
+    sortBy: 'amount', //date or amount
+    startDate: undefined,
+    endDate: undefined
+  }
 };
+// ---------------------------------------------------------
 
+// ACTION CREATORS
 // Add Expense Action Generator
 const addExpense = ({
   description = '',
@@ -30,12 +37,22 @@ const addExpense = ({
   }
 });
 
-// Remove Expense 
+// Remove Expense Action Creator
 const removeExpense = (id = '') => ({
   type: 'REMOVE_EXPENSE',
   expenseId: id
 });
 
+// Edit Expense Action Creator
+const editExpense = (id=undefined, update={}) => ({
+  type: 'EDIT_EXPENSE',
+  id,
+  update
+});
+
+// -----------------------------------------------------------------
+
+// REDUCERS
 // Expense Reducer
 const expenseReducer = (state = [], action) => {
   switch (action.type) {
@@ -47,6 +64,19 @@ const expenseReducer = (state = [], action) => {
       let newExpense = state.filter( f => f.id !== action.expenseId);
       //console.log('New Expense', newExpense);
       return newExpense;
+    }
+    case 'EDIT_EXPENSE': {
+      console.log('Edit Expense', state, action); 
+      return state.map(m => {
+        if(m.id == action.id) {
+          return {
+            ...m,
+            ...action.update
+          };
+        } else {
+          return m;
+        }
+      })
     }
     default: 
       return state;
@@ -67,6 +97,9 @@ const filterReducer = (state = filterReducerDefaultState, action) => {
   }
 }
 
+// --------------------------------------------------------------------
+
+// STORE
 // Combine Reducer method that gets passed while creating the app store
 const rootReducer = combineReducers({
   expenses: expenseReducer,
@@ -79,9 +112,11 @@ const store = createStore(rootReducer);
 store.subscribe(() => {
   console.log(store.getState());
 });
+//----------------------------------------------------------------------
 
+// DISPATCHING ACTION CREATORS
 // Dispatch add expense action creator
-let expenseThree = store.dispatch(addExpense({
+let expenseOne = store.dispatch(addExpense({
   note: 'This expense is for rent.',
   description: 'Rent'
 }));
@@ -91,7 +126,13 @@ let expenseTwo = store.dispatch(addExpense({
   note: 'This expense is for coffee.',
   description: 'Coffee House'
 }));
-//console.log(expenseTwo.expense.id);
+//console.log(expenseTwo);
 
 // Dispatch remove expense action creator
-store.dispatch(removeExpense(expenseTwo.expense.id))
+store.dispatch(removeExpense(expenseOne.expense.id));
+
+// Dispatch edit expense action creator
+store.dispatch(editExpense(expenseTwo.expense.id, {
+  amount: 500, 
+  note: 'Updated Coffee expenses.'
+}));
