@@ -28,9 +28,10 @@ const incrementVal = (payload = {}) => ({
 });
 
 // Decrement Action Creator
-const decrementVal = (payload = {}) => ({
+// Making use of destructuring. And providing a default param here
+const decrementVal = ({decrementBy = 11} = {}) => ({
   type: 'DECREMENT',
-  decrementBy: typeof(payload.decrementBy) === 'number' ? payload.decrementBy : 1
+  decrementBy
 });
 
 // Reset Action Creator
