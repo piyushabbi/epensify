@@ -1,12 +1,13 @@
 import { createStore, combineReducers } from 'redux';
 import uuid from 'uuid';
 
+// App data structure
 const demoState = {
   expense: {
-    id: '12345',
+    id: 'es3s1f4g5',
     description: '',
-    note: 'This expense is for the house rent.',
-    amount: 4000,
+    note: '',
+    amount: 0,
     createdAt: 0
   },
   filter: {}
@@ -88,7 +89,7 @@ let expenseThree = store.dispatch(addExpense({
 // Dispatch add expense action creator
 let expenseTwo = store.dispatch(addExpense({
   note: 'This expense is for coffee.',
-  description: 'Coffe House'
+  description: 'Coffee House'
 }));
 //console.log(expenseTwo.expense.id);
 
