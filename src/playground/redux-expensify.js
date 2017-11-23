@@ -150,9 +150,14 @@ const filterReducer = (state = filterReducerDefaultState, action) => {
 
 // --------------------------------------------------------------------
 // Filter by logic
-const getFilteredData = (expenses, filter) => {
-  //console.log(expenses, filter);
-  if (filter) return expenses.filter(f=>f.description==filter.text);
+const getFilteredData = (expenses, { text, sortBy, startDate, endDate }) => {
+  return expenses.filter(expense => {
+    const starDateMatch = typeof(startDate) =='number' || expense.createdAt >= startDate;
+    const endDateMatch = typeof(endDate) == 'number' || expense.createdAt <= endDate;
+    const textMatch = expense.description.toLowerCase().includes(text.toLowerCase());
+    
+    return starDateMatch && endDateMatch && textMatch;
+  }); 
 }
 
 // --------------------------------------------------------------------
@@ -176,16 +181,16 @@ store.subscribe(() => {
 
 // DISPATCHING ACTION CREATORS
 // Dispatch add expense action creator
-let expenseOne = store.dispatch(addExpense({
-  note: 'This expense is for rent.',
-  description: 'Rent'
-}));
+// let expenseOne = store.dispatch(addExpense({
+//   note: 'This expense is for rent.',
+//   description: 'Rent'
+// }));
 
 // Dispatch add expense action creator
-let expenseTwo = store.dispatch(addExpense({
-  note: 'This expense is for coffee.',
-  description: 'Coffee House'
-}));
+// let expenseTwo = store.dispatch(addExpense({
+//   note: 'This expense is for coffee.',
+//   description: 'Coffee House'
+// }));
 ////console.log(expenseTwo);
 
 store.dispatch(
@@ -198,28 +203,28 @@ store.dispatch(
 store.dispatch(
   addExpense({
     note: "Have some tea.",
-    description: "Tea"
+    description: "Tea lo"
   })
 );
 
-store.dispatch(
-  addExpense({
-    note: "This expense is for some coffee.",
-    description: "Coffee"
-  })
-);
+// store.dispatch(
+//   addExpense({
+//     note: "This expense is for some coffee.",
+//     description: "Coffee"
+//   })
+// );
 
 // Dispatch remove expense action creator
-store.dispatch(removeExpense(expenseOne.expense.id));
+// store.dispatch(removeExpense(expenseOne.expense.id));
 
-// Dispatch edit expense action creator
-store.dispatch(editExpense(expenseTwo.expense.id, {
-  amount: 500, 
-  note: 'Updated Coffee expenses.'
-}));
+// // Dispatch edit expense action creator
+// store.dispatch(editExpense(expenseTwo.expense.id, {
+//   amount: 500, 
+//   note: 'Updated Coffee expenses.'
+// }));
 
 // Dispatch set filter text
-store.dispatch(setFilterText('Tea'));
+store.dispatch(setFilterText('lo'));
 
 // Dispatch sort by amount
 store.dispatch(sortByAmount());
@@ -228,6 +233,6 @@ store.dispatch(sortByAmount());
 store.dispatch(sortByDate());
 
 // Dispatch set start date
-store.dispatch(setStartDate(125));
+store.dispatch(setStartDate(1000));
 // Dispatch set End date
-store.dispatch(setEndDate(1250));
+store.dispatch(setEndDate(10000));
