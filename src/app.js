@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 
 import './styles/styles.scss';
 
@@ -10,9 +11,9 @@ import { addExpense } from './actions/expenses.actions';
 import { setTextFilter } from './actions/filters.actions';
 import { getVisibleExpenses } from './selectors/visibeExpenses';
  
-store.subscribe(()=>{
-  console.log(store.getState());
-});
+// store.subscribe(()=>{
+//   console.log(store.getState());
+// });
 
 // Dispatch AddExpense -> Water Bill
 store.dispatch(addExpense({
@@ -33,7 +34,9 @@ store.dispatch(addExpense({
 // Dispatch SetTextFilter -> Bill
 store.dispatch(setTextFilter('bill'));
 
-// Call GetVisible Expenses ad print visible expenses on screen
-console.log(getVisibleExpenses(store.getState().expenses, store.getState().filters));
-
-render(<AppRouter />, document.getElementById('root'));
+render(
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>,
+  document.getElementById("root")
+);

@@ -1,42 +1,24 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
 
+import { getVisibleExpenses } from '../selectors/visibeExpenses';
 import ExpenseList from './ExpenseList';
 import AddExpense from './AddExpense';
+import ExpenseListFilters from './ExpenseListFilters';
 
-//----------------------------------------------------------------
+const Dashboard = (props) => (
+  <div className="container">
+    <AddExpense total={props.expenses.length} />
+    <ExpenseListFilters />
+    <ExpenseList expenses={props.expenses} />
+  </div>
+);
 
+const mapStateToProps = (state) => ({
+  expenses: getVisibleExpenses(state.expenses, state.filters)
+});
 
-//----------------------------------------------------------------
+// HOC using connect
+const ConnectedExpenseList = connect(mapStateToProps)(Dashboard);
 
-class Dashboard extends Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      expenses: [{
-        id: 1,
-        title: "Rent",
-        description: "",
-        createdAt: 1000,
-        amount: 200
-      },
-      {
-        id: 2,
-        title: "Food",
-        description: "Dominos",
-        createdAt: 100,
-        amount: 400
-      }]
-    }
-  }
-  render () {
-    return (
-      <div className="container">
-        <AddExpense total={this.state.expenses.length} />
-        <ExpenseList expenses={this.state.expenses}/>
-      </div>
-    )
-  }
-}
-
-export default Dashboard;
+export default ConnectedExpenseList;
