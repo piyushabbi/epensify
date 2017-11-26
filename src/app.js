@@ -10,7 +10,7 @@ import { store } from './store/configureStore';
 import { addExpense } from './actions/expenses.actions';
 import { setTextFilter } from './actions/filters.actions';
 import { getVisibleExpenses } from './selectors/visibeExpenses';
- 
+
 // store.subscribe(()=>{
 //   console.log(store.getState());
 // });
