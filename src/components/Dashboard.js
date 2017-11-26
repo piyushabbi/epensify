@@ -9,6 +9,7 @@ import ExpenseListFilters from './ExpenseListFilters';
 const Dashboard = props => (
   <div className="container">
     <AddExpense total={props.expenses.length} />
+    <br/>
     <div className="row">
       <ExpenseListFilters />
     </div>

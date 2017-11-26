@@ -77,6 +77,7 @@ class ExpenseForm extends React.Component {
           value={this.state.description}
           onChange={e=>{this.setState({description: e.target.value})}}
         />
+        <br />
         <input 
           className="form-control"
           placeholder="Amount"
@@ -84,6 +85,7 @@ class ExpenseForm extends React.Component {
           value={this.state.amount}
           onChange={this.amountChangeHandler}
         />
+        <br />
         <SingleDatePicker
           date={this.state.createdAt}
           onDateChange={createdAt => this.setState({ createdAt })}
@@ -92,12 +94,14 @@ class ExpenseForm extends React.Component {
           numberOfMonths={1}
           isOutsideRange={() => false} // To make every date available
         />
+        <br />
         <textarea
           className="form-control"
           placeholder="Add a note for the expense (optional)"
           value={this.state.note}
           onChange={e=>{this.setState({note: e.target.value})}}
         ></textarea>
+        <br/>
         <button className="btn btn-warning">Add Expense</button>
       </form>
     );

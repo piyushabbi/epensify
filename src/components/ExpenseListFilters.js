@@ -12,7 +12,7 @@ const ExpenseListFilters = (props) => {
         placeholder="Search for Expense"
         value={props.filters.text}
         onChange={ (e)=> { props.dispatch(setTextFilter(e.target.value)) }} />
-
+      <br />
       <select 
         className="form-control"
         value={props.filters.sortBy}
