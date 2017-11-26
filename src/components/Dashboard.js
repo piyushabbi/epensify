@@ -6,10 +6,12 @@ import ExpenseList from './ExpenseList';
 import AddExpense from './AddExpense';
 import ExpenseListFilters from './ExpenseListFilters';
 
-const Dashboard = (props) => (
+const Dashboard = props => (
   <div className="container">
     <AddExpense total={props.expenses.length} />
-    <ExpenseListFilters />
+    <div className="row">
+      <ExpenseListFilters />
+    </div>
     <ExpenseList expenses={props.expenses} />
   </div>
 );

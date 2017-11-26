@@ -23,6 +23,14 @@ store.dispatch(addExpense({
   createdAt: 1200
 }));
 
+// Dispatch AddExpense -> Rent Bill
+store.dispatch(addExpense({
+  description: 'Rent',
+  note: 'Rent for December',
+  amount: 56000,
+  createdAt: 1000
+}));
+
 // Dispatch AddExpense -> Gas Bill
 store.dispatch(addExpense({
   description: 'Gas Bill',
@@ -32,7 +40,7 @@ store.dispatch(addExpense({
 }));
 
 // Dispatch SetTextFilter -> Bill
-store.dispatch(setTextFilter('bill'));
+//store.dispatch(setTextFilter('bill'));
 
 render(
   <Provider store={store}>

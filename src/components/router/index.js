@@ -1,21 +1,16 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import AddExpensePage from '../pages/AddExpensePage';
+import {AboutPage} from '../pages/AboutPage';
+import {NotFoundPage} from '../pages/NotFoundPage';
 import Header from '../Header';
 import Dashboard from '../Dashboard';
 
-const AddExpensePage = () => (
-  <div>Add Expense Page</div>
-);
 const EditExpense = () => (
   <div>Edit Expense Page</div>
 );
-const AboutPage = () => (
-  <div>About Page</div>
-);
-const NotFoundPage = () => (
-  <div>404! Not Found</div>
-);
+
 const AppRouter = () => {
   return (
     <BrowserRouter>
