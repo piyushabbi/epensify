@@ -10,10 +10,10 @@ class ExpenseForm extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      description: '',
-      amount: '',
-      note: '',
-      createdAt: moment(),
+      description: props.expense ? props.expense.description : '',
+      amount: props.expense ? props.expense.amount.toString() : '',
+      note: props.expense ? props.expense.note :'',
+      createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
       calenderFocused: false,
       errorString: ''
     };
@@ -53,7 +53,7 @@ class ExpenseForm extends React.Component {
       });
       this.props.onSubmit({
         description: this.state.description,
-        amount: parseFloat(this.state.amount, 10) * 100,
+        amount: parseFloat(this.state.amount, 10),
         createdAt: this.state.createdAt.valueOf(),
         note: this.state.note
       })
